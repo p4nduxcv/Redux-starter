@@ -1,10 +1,64 @@
+/* eslint-disable default-case */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { createStore } from 'redux';
+import allReducers from './reducers';
+import { Provider } from 'react-redux';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const store = createStore(
+    allReducers,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>, document.getElementById('root')
+);
+
+/*import { createStore } from 'redux';
+
+//STORE
+
+//ACTION INCREMENT
+const increment = () => {
+    return {
+        type: 'INCREMENT'
+    }
+}
+
+const decrement = () => {
+    return {
+        type: 'DECREMENT'
+    }
+}
+
+//REDUCER :- check what to do to action
+let INITIAL_STATE = 0;
+const counter = (State = INITIAL_STATE, action) => {
+    switch (action.type) {
+        case 'INCREMENT':
+            console.log(State)
+            return State + 1;
+        case 'DECREMENT':
+            return State - 1;
+    }
+}
+
+let store = createStore(counter);
+
+//Display it on console
+store.subscribe(() => console.log(store.getState()));
+
+//DISPATCH -: execute the action
+store.dispatch(increment());
+store.dispatch(decrement());
+store.dispatch(decrement());*/
+
+//ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
